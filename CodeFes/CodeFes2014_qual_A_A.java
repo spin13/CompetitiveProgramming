@@ -2,21 +2,51 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Arrays;
 
-public class ABC012_B {
+public class CodeFes2014_qual_A_A {
     static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int N = sc.nextInt();
+        // B-Aで重複する部分があるのでAを-1しておく
+        int A = sc.nextInt()-1;
+        int B = sc.nextInt();
+        System.out.println(neo_count_leap_year(B) - neo_count_leap_year(A));
+    }
 
-        System.out.println(
-            // 1時間は3600秒
-            String.format("%1$02d", N / 3600) +
-            ":" +
-            // 1分である60秒で割った後，1時間である60分の余りを出す
-            String.format("%1$02d", N / 60 % 60) +
-            ":" +
-            String.format("%1$02d", N % 60)
-        );
+    // 1年ずつ増やしていってうるう年を数える方法
+    // TLEします
+    static int count_leap_year(int n){
+        int ret = 0;
+        for(int i=4; i<=n; i++){
+            if(i%400 == 0){
+                ret++;
+            // 4で割り切れてかつ100で割り切れない
+            } else if(i%4 == 0 && i%100 !=0){
+                ret++;
+            }
+        }
+        return ret;
+    }
+
+    // 4年ずつ増やしていってうるう年を数える方法
+    // ギリギリ間に合う
+    static int count_leap_year_four(int n){
+        int ret = 0;
+        for(int i=4; i<=n; i+=4){
+            if(i%400 == 0){
+                ret++;
+            // 4で割り切れてかつ100で割り切れない
+            } else if(i%4 == 0 && i%100 !=0){
+                ret++;
+            }
+        }
+        return ret;
+    }
+
+    static int neo_count_leap_year(int n){
+        // n/4 4で割った数はうるう年
+        // n/100 ただし100で割り切れる年はうるう年じゃないので引く
+        // n/400 ただし400で割り切れる場合はうるう年なので足す
+        return n/4 - n/100 + n/400;
     }
 
     static void sort(int[] a, int b) {//arrays.sort 0で降順, それ以外で昇順

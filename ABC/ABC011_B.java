@@ -1,19 +1,32 @@
-/*
- * Accepted
- */
-
 import java.util.Scanner;
 import java.util.Collections;
 import java.util.Arrays;
-import java.util.ArrayList;
 
 public class ABC011_B {
     static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        String s=sc.next();
-        System.out.println(CS(s.charAt(0)).toUpperCase()
-                + s.substring(1, s.length()).toLowerCase());
+        String S = sc.next();
+        System.out.println(
+            String.valueOf(S.charAt(0)).toUpperCase() +
+            S.substring(1, S.length()).toLowerCase()
+        );
+    }
+
+    static void sort(int[] a, int b) {//arrays.sort 0で降順, それ以外で昇順
+        if (b == 0) {
+            Arrays.sort(a);
+            int t = 0;
+            int c = a.length - 1;
+            for (int i = c; i >= c / 2 + 1; i--) {
+
+                t = a[i];
+                a[i] = a[c - i];
+                a[c - i] = t;
+            }
+        } else {
+            Arrays.sort(a);
+        }
     }
 
     static int SI(String a) {

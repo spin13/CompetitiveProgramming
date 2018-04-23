@@ -2,21 +2,38 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Arrays;
 
-public class ABC012_B {
+public class WUPC_2_B {
     static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         int N = sc.nextInt();
+        // 配列外参照するのが面倒なので.....をてきとうにつけておく
+        // charのほうが参照が楽なのでchar配列に
+        char[] S = (sc.next() + ".....").toCharArray();
 
-        System.out.println(
-            // 1時間は3600秒
-            String.format("%1$02d", N / 3600) +
-            ":" +
-            // 1分である60秒で割った後，1時間である60分の余りを出す
-            String.format("%1$02d", N / 60 % 60) +
-            ":" +
-            String.format("%1$02d", N % 60)
-        );
+        int ans = 0;
+        int i=0;
+
+        // 進む回数に上限はないので 水たまりのないマスがあればどんどんそこに進んで良い
+        // i は現在位置を表す
+        while(i<N){
+            // 1~3歩先のどれかが水たまりでないマスならそこへ向かう
+            // iをそのマスにして移動したことにする
+            if('.' == S[i+1]){
+                i = i+1;
+            } else if('.' == S[i+2]){
+                i = i+2;
+            } else if('.' == S[i+3]){
+                i = i+3;
+            
+            // 1~3歩のどこも水たまりなら，最も遠くの水たまりを踏む
+            }else{
+                ans++;
+                i = i+3;
+            }
+        }
+
+        System.out.println(ans);
     }
 
     static void sort(int[] a, int b) {//arrays.sort 0で降順, それ以外で昇順

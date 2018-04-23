@@ -2,21 +2,26 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Arrays;
 
-public class ABC012_B {
+public class WUPC_2_B_2 {
     static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         int N = sc.nextInt();
 
-        System.out.println(
-            // 1時間は3600秒
-            String.format("%1$02d", N / 3600) +
-            ":" +
-            // 1分である60秒で割った後，1時間である60分の余りを出す
-            String.format("%1$02d", N / 60 % 60) +
-            ":" +
-            String.format("%1$02d", N % 60)
-        );
+        // . で分割して配列に格納する
+        // XX, X, XXXX, X  みたいな感じで格納される
+        String[] map = sc.next().split("\\.");
+
+        int ans = 0;
+        for(int i=0;i<map.length;i++){
+            // 分割された各要素に対して，越えられない数の水たまり(一度に3以上連続しているもの)がいくつあるか
+            // XXX    -> 1
+            // XXXX   -> 1
+            // XXXXXX -> 2  3歩ずつ進んでも2回みずたまりを踏んでしまう
+            ans += map[i].length() / 3;
+        }
+
+        System.out.println(ans);
     }
 
     static void sort(int[] a, int b) {//arrays.sort 0で降順, それ以外で昇順

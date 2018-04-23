@@ -2,21 +2,11 @@ import java.util.Scanner;
 import java.util.Collections;
 import java.util.Arrays;
 
-public class ABC012_B {
+public class Utility {
     static final Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
-        int N = sc.nextInt();
 
-        System.out.println(
-            // 1時間は3600秒
-            String.format("%1$02d", N / 3600) +
-            ":" +
-            // 1分である60秒で割った後，1時間である60分の余りを出す
-            String.format("%1$02d", N / 60 % 60) +
-            ":" +
-            String.format("%1$02d", N % 60)
-        );
     }
 
     static void sort(int[] a, int b) {//arrays.sort 0で降順, それ以外で昇順
